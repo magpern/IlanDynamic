@@ -11,6 +11,7 @@ double Stoploss = 500.0;            // Stoploss in pips
 double TrailStart = 100.0;
 double TrailStop = 100.0;
 //ннннннннннннннннннннннннннннннннннннннннннннннннннннннннннннннннннннннннннннннннннннннннннннннннннннннннннннннннннннннннннннннннннннннннннннннннннннннннннннннннннннннннннннннннн
+extern bool DisplayOnScreenText = true;
 extern double LotExponent = 1.42;   // Multiplicator for each new position
 extern bool    DynamicPips                   = true; 
 extern int     DefaultPips                   = 120;
@@ -64,6 +65,7 @@ int deinit() {
 int start()
 
 {
+   if (DisplayOnScreenText) {
     Comment("" 
          + "\n" 
          
@@ -107,6 +109,7 @@ int start()
          + "Profit:            " + DoubleToStr(CalculateProfit(), 2)
          + "\n"      
          + "_______________________________");
+   }
 
    int PerRSI;
 
@@ -178,7 +181,7 @@ int start()
          }
       }
       
-   if (total > 0 && total <= MaxTrades) {
+   if (total > 0 && total < MaxTrades) {
       RefreshRates();
       LastBuyPrice = FindLastBuyPrice();
       LastSellPrice = FindLastSellPrice();
